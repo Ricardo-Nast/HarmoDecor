@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Completo - Harmoniza Decorações</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#E86C28',
+                            dark: '#181512',
+                            light: '#F8F6F2',
+                            accent: '#D9531E'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .auto-hero-bg {
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Animação suave deslizante para os blocos da galeria */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .gallery-card {
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
+            animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Efeito de atraso progressivo nos blocos (cascata) */
+        .gallery-card:nth-child(1) { animation-delay: 0.05s; }
+        .gallery-card:nth-child(2) { animation-delay: 0.1s; }
+        .gallery-card:nth-child(3) { animation-delay: 0.15s; }
+        .gallery-card:nth-child(4) { animation-delay: 0.2s; }
+        .gallery-card:nth-child(5) { animation-delay: 0.25s; }
+        .gallery-card:nth-child(6) { animation-delay: 0.3s; }
+        .gallery-card:nth-child(7) { animation-delay: 0.35s; }
+        .gallery-card:nth-child(8) { animation-delay: 0.4s; }
+        .gallery-card:nth-child(9) { animation-delay: 0.45s; }
+    </style>
+</head>
+<body class="font-sans bg-brand-light text-gray-800 antialiased selection:bg-brand-orange selection:text-white min-h-screen flex flex-col">
+
+    <!-- Topbar Superior -->
+    <div class="bg-brand-dark text-gray-300 text-xs py-2.5 px-4 border-b border-gray-800 relative z-50">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-brand-orange hover:text-white font-medium transition-colors">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Site Principal
+                </a>
+                <span class="text-gray-700">|</span>
+                <span class="text-gray-300">Catálogo de Produtos Sob Medida</span>
+            </div>
+            <a href="https://wa.me/5524981567699" target="_blank" class="text-brand-orange font-semibold hover:text-white transition-colors">
+                <i class="fas fa-phone-alt"></i> (24) 98156-7699
+            </a>
+        </div>
+    </div>
+
+    <!-- Header do Catálogo -->
+    <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col">
+                <span class="font-serif font-extrabold text-xl tracking-tight text-gray-900 leading-none">
+                    HARMONIZA
+                </span>
+                <span class="text-xs text-brand-orange tracking-widest uppercase font-medium mt-0.5">
+                    Decorações
+                </span>
+            </a>
+
+            <!-- Busca Rápida -->
+            <div class="relative max-w-xs w-full hidden sm:block">
+                <input type="text" id="catalog-search" onkeyup="filterCatalogBySearch()" placeholder="Buscar produto (ex: rolô, blackout)..." class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-200 text-xs focus:outline-none focus:border-brand-orange transition-colors">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+            </div>
+
+            <a href="https://wa.me/5524981567699?text=Olá!%20Estou%20vendo%20o%20catálogo%20e%20gostaria%20de%20um%20orçamento." target="_blank" class="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-accent text-white px-5 py-2.5 rounded-full text-xs font-semibold shadow-md transition-all">
+                <i class="fab fa-whatsapp text-sm"></i> Orçamento Direto
+            </a>
+        </div>
+    </header>
+
+    <!-- FAIXA SUPERIOR COM CARROSSEL DE FUNDO E DROPDOWNS -->
+    <section class="relative bg-brand-dark text-white pt-16 pb-20 px-4 border-b border-gray-800 z-30">
+        
+        <!-- CARROSSEL AUTOMÁTICO DE FUNDO -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <img src="Imagens/IMG_4350.JPG" class="auto-hero-bg absolute inset-0 w-full h-full object-cover opacity-45">
+            <img src="Imagens/IMG_0989.JPG" class="auto-hero-bg absolute inset-0 w-full h-full object-cover opacity-0">
+            <img src="Imagens/IMG_0758.JPG" class="auto-hero-bg absolute inset-0 w-full h-full object-cover opacity-0">
+            <img src="Imagens/IMG_4146.JPG" class="auto-hero-bg absolute inset-0 w-full h-full object-cover opacity-0">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto text-center space-y-6">
+            <h1 class="font-serif text-3xl sm:text-5xl font-bold drop-shadow-md">Nosso Catálogo Completo</h1>
+            <p class="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto font-light drop-shadow">
+                Explore nossas linhas de Cortinas, Persianas e Toldos. Clique na foto para ampliar ou no botão do WhatsApp para solicitar um orçamento direto daquele modelo.
+            </p>
+            
+            <!-- MENUS DE CATEGORIA COM SUBMENUS DROPDOWN -->
+            <div class="flex flex-wrap justify-center gap-3 pt-2 relative z-50">
+                
+                <!-- Todos os Produtos -->
+                <button onclick="filterCatalog('todas', 'todos')" class="bg-brand-orange text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:bg-brand-accent transition-all">
+                    Todos os Produtos
+                </button>
+
+                <!-- Dropdown: CORTINAS -->
+                <div class="relative group">
+                    <button class="bg-brand-dark/80 backdrop-blur-md hover:bg-brand-orange text-white border border-white/20 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all inline-flex items-center gap-2 shadow-lg">
+                        <span>Cortinas</span>
+                        <i class="fas fa-chevron-down text-xs text-brand-orange group-hover:text-white transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-brand-dark/95 backdrop-blur-md border border-gray-700 rounded-2xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 text-left">
+                        <a href="javascript:void(0)" onclick="filterCatalog('cortinas', 'todas')" class="block px-4 py-2 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Todas as Cortinas</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('cortinas', 'sem-blackout')" class="block px-4 py-2 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Cortina sem blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('cortinas', 'com-blackout')" class="block px-4 py-2 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Cortina com blackout</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown: PERSIANAS -->
+                <div class="relative group">
+                    <button class="bg-brand-dark/80 backdrop-blur-md hover:bg-brand-orange text-white border border-white/20 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all inline-flex items-center gap-2 shadow-lg">
+                        <span>Persianas</span>
+                        <i class="fas fa-chevron-down text-xs text-brand-orange group-hover:text-white transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-64 bg-brand-dark/95 backdrop-blur-md border border-gray-700 rounded-2xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 text-left max-h-80 overflow-y-auto">
+                        <div class="px-4 py-1 text-[10px] font-bold text-brand-orange uppercase tracking-wider">Persiana Rolô</div>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'rolo-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Rolô com blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'rolo-sem-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Rolô sem blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'rolo-tela-solar')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Rolô Tela Solar</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'rolo-double-vision')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Rolô Double Vision</a>
+
+                        <div class="px-4 py-1 mt-2 text-[10px] font-bold text-brand-orange uppercase tracking-wider border-t border-gray-800 pt-2">Romana</div>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'romana-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Romana com blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'romana-sem-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Romana sem blackout</a>
+
+                        <div class="px-4 py-1 mt-2 text-[10px] font-bold text-brand-orange uppercase tracking-wider border-t border-gray-800 pt-2">Vertical</div>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'vertical-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Vertical com blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'vertical-sem-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Vertical sem blackout</a>
+
+                        <div class="px-4 py-1 mt-2 text-[10px] font-bold text-brand-orange uppercase tracking-wider border-t border-gray-800 pt-2">Horizontal 50mm</div>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'horizontal-aluminio')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Horizontal 50mm Alumínio</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'horizontal-madeira')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Horizontal 50mm Madeira</a>
+
+                        <div class="px-4 py-1 mt-2 text-[10px] font-bold text-brand-orange uppercase tracking-wider border-t border-gray-800 pt-2">Painel & Teto</div>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'painel-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Painel com blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'painel-sem-blackout')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Painel sem blackout</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('persianas', 'romana-teto')" class="block px-4 py-1.5 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Romana de Teto</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown: TOLDOS -->
+                <div class="relative group">
+                    <button class="bg-brand-dark/80 backdrop-blur-md hover:bg-brand-orange text-white border border-white/20 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all inline-flex items-center gap-2 shadow-lg">
+                        <span>Toldos</span>
+                        <i class="fas fa-chevron-down text-xs text-brand-orange group-hover:text-white transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-brand-dark/95 backdrop-blur-md border border-gray-700 rounded-2xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 text-left">
+                        <a href="javascript:void(0)" onclick="filterCatalog('toldos', 'braco-articulado')" class="block px-4 py-2 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Toldo com braço articulado</a>
+                        <a href="javascript:void(0)" onclick="filterCatalog('toldos', 'toldo-vertical')" class="block px-4 py-2 text-xs text-gray-200 hover:bg-brand-orange hover:text-white transition-colors">Toldo vertical</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA COMPLETA DE FOTOS COM BOTÃO DE WHATSAPP EM CADA ITEM -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 w-full relative z-10">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="catalog-grid">
+            
+            <!-- CORTINAS -->
+            <div class="gallery-card main-cortinas sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_4350.JPG')">
+                <img src="Imagens/IMG_4350.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Cortina sem blackout
+                </span>
+                
+                <!-- Overlay de Ações (Ampliar + Pedir Orçamento no WhatsApp) -->
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    
+                    <button onclick="sendWhatsAppProduct(event, 'Cortina sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-cortinas com-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_2847.JPG')">
+                <img src="Imagens/IMG_2847.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Cortina com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Cortina com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-cortinas sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_3450.JPG')">
+                <img src="Imagens/IMG_3450.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Cortina sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Cortina sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-cortinas sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0815.JPG')">
+                <img src="Imagens/IMG_0815.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Cortina sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Cortina sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-cortinas com-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0835.JPG')">
+                <img src="Imagens/IMG_0835.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Cortina com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Cortina com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-cortinas sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0836.JPG')">
+                <img src="Imagens/IMG_0836.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Cortina sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Cortina sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERSIANA ROLÔ -->
+            <div class="gallery-card main-persianas rolo-tela-solar rolo-sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/6.png')">
+                <img src="Imagens/6.png" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Rolô Tela Solar
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Rolô Tela Solar')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas rolo-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0706.JPG')">
+                <img src="Imagens/IMG_0706.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Rolô com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Rolô com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas rolo-sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0837.JPG')">
+                <img src="Imagens/IMG_0837.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Rolô sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Rolô sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas rolo-double-vision relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0839.JPG')">
+                <img src="Imagens/IMG_0839.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Rolô Double Vision
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Rolô Double Vision')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERSIANA VERTICAL -->
+            <div class="gallery-card main-persianas vertical-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0989.JPG')">
+                <img src="Imagens/IMG_0989.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Vertical com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Vertical com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas vertical-sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/8.jpg')">
+                <img src="Imagens/8.jpg" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Vertical sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Vertical sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas vertical-sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0629.JPG')">
+                <img src="Imagens/IMG_0629.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Vertical sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Vertical sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas vertical-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_1037.JPG')">
+                <img src="Imagens/IMG_1037.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Vertical com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Vertical com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERSIANA HORIZONTAL 50MM -->
+            <div class="gallery-card main-persianas horizontal-madeira horizontal-aluminio relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0988.JPG')">
+                <img src="Imagens/IMG_0988.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Horizontal 50mm Madeira
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Horizontal 50mm Madeira')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- PERSIANA ROMANA -->
+            <div class="gallery-card main-persianas romana-sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0980.JPG')">
+                <img src="Imagens/IMG_0980.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Romana sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Romana sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas romana-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0858.JPG')">
+                <img src="Imagens/IMG_0858.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Romana com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Romana com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAINEL -->
+            <div class="gallery-card main-persianas painel-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0985.JPG')">
+                <img src="Imagens/IMG_0985.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Painel com blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Painel com blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-card main-persianas painel-sem-blackout relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/IMG_0862.JPG')">
+                <img src="Imagens/IMG_0862.JPG" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Painel sem blackout
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Painel sem blackout')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
+            </div>
+
+            <!-- ROMANA DE TETO -->
+            <div class="gallery-card main-persianas romana-teto relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer group" onclick="openLightbox('Imagens/7.jpg')">
+                <img src="Imagens/7.jpg" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 left-4 bg-brand-dark/90 text-brand-orange text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-brand-orange/30">
+                    Romana de Teto
+                </span>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3 p-4">
+                    <span class="bg-white/90 text-gray-900 px-4 py-2 rounded-full font-semibold text-xs shadow-md"><i class="fas fa-search-plus text-brand-orange"></i> Clique para Ampliar</span>
+                    <button onclick="sendWhatsAppProduct(event, 'Persiana Romana de Teto')" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full text-xs shadow-lg transition-all flex items-center gap-2">
+                        <i class="fab fa-whatsapp text-base"></i> Pedir Orçamento
+                    </button>
+                </div>
